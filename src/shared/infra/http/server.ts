@@ -70,7 +70,7 @@ if (process.env.APP_ENV === 'production') {
   const certificate = fs.readFileSync(certificatePath, 'utf8');
   const credentials = { key: privateKey, cert: certificate };
 
-  const httpsServer = https.createServer(credentials, app);
+  const httpsServer = https.createServer({}, app);
   httpsServer.listen(appPort, () => {
     console.log(`HTTPS Server started on port ${appPort}!`);
   });
