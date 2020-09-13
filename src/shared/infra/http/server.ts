@@ -77,6 +77,6 @@ if (process.env.APP_ENV === 'production') {
 } else {
   const httpServer = http.createServer(app);
   httpServer.listen(process.env.PORT || appPort, () => {
-    console.log(`HTTP Server started on port ${appPort}!`);
+    console.log(`HTTP Server started on port ${process.env.PORT || appPort}!`);
   });
 }
