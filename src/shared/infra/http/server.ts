@@ -66,13 +66,13 @@ if (process.env.APP_ENV === 'production') {
   const privateKeyPath = process.env.SSL_PRIVATE_KEY || '';
   const certificatePath = process.env.SSL_CERTIFICATE || '';
 
-  const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
-  const certificate = fs.readFileSync(certificatePath, 'utf8');
-  const credentials = { key: privateKey, cert: certificate };
+  // const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+  // const certificate = fs.readFileSync(certificatePath, 'utf8');
+  // const credentials = { key: privateKey, cert: certificate };
 
-  const httpsServer = https.createServer(credentials, app);
-  httpsServer.listen(appPort, () => {
-    console.log(`HTTPS Server started on port ${appPort}!`);
+  const httpsServer = https.createServer({}, app);
+  httpsServer.listen(process.env.PORT || appPort, () => {
+    console.log(`HTTPS Server started on port ${process.env.PORT || appPort}!`);
   });
 } else {
   const httpServer = http.createServer(app);
