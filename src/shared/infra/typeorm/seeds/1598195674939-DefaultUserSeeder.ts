@@ -17,7 +17,7 @@ export default class DefaultUserSeeder1598195674939
     {
       name: 'Admin',
       email: 'admin@admin.com',
-      password: '123456',
+      password: '12345',
     },
   ];
 
