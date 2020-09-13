@@ -48,6 +48,20 @@ export default interface ILocale {
       alreadyExists: string;
       notFound: string;
     };
+    company: string;
+    companies: {
+      alreadyExists: string;
+      notFound: string;
+    };
+    cryptocurrency: string;
+    cryptocurrencies: {
+      alreadyExists: string;
+      notFound: string;
+    };
+    transaction: string;
+    transactions: {
+      notFound: string;
+    };
   };
 
   /* Validation */

@@ -6,8 +6,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import uploadConfig from '@config/upload';
-
 import { Exclude, Expose } from 'class-transformer';
 
 @Entity('users')
@@ -26,9 +24,6 @@ class User {
   password: string;
 
   @Column()
-  avatar: string;
-
-  @Column()
   active: boolean;
 
   @CreateDateColumn()
@@ -42,20 +37,6 @@ class User {
 
   @Expose()
   permissions: string[];
-
-  @Expose({ name: 'avatar_url' })
-  get avatarUrl(): string | null {
-    if (!this.avatar) {
-      return null;
-    }
-
-    switch (uploadConfig.driver) {
-      case 'disk':
-        return `${process.env.APP_API_URL}/files/${this.avatar}`;
-      default:
-        return null;
-    }
-  }
 }
 
 export default User;

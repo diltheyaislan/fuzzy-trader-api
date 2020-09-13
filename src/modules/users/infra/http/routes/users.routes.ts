@@ -8,12 +8,19 @@ import UsersController from '@modules/users/infra/http/controllers/UsersControll
 const usersRouter = Router();
 const usersController = new UsersController();
 
-usersRouter.use(ensureAuthenticated);
-usersRouter.use(hasPermission('users.all'));
+usersRouter.get(
+  '/',
+  ensureAuthenticated,
+  hasPermission('users.all'),
+  usersController.index,
+);
 
-usersRouter.get('/', usersController.index);
-
-usersRouter.get('/:id', usersController.show);
+usersRouter.get(
+  '/:id',
+  ensureAuthenticated,
+  hasPermission('users.all'),
+  usersController.show,
+);
 
 usersRouter.post(
   '/',
@@ -29,6 +36,8 @@ usersRouter.post(
 
 usersRouter.patch(
   '/:id',
+  ensureAuthenticated,
+  hasPermission('users.all'),
   celebrate({
     [Segments.BODY]: {
       name: Joi.string(),
@@ -40,6 +49,11 @@ usersRouter.patch(
   usersController.update,
 );
 
-usersRouter.delete('/:id', usersController.delete);
+usersRouter.delete(
+  '/:id',
+  ensureAuthenticated,
+  hasPermission('users.all'),
+  usersController.delete,
+);
 
 export default usersRouter;

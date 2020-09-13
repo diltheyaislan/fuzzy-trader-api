@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import 'dotenv/config';
 
 import fs from 'fs';
+import path from 'path';
 
 import express, { Request, Response, NextFunction } from 'express';
 import http from 'http';
@@ -27,6 +28,12 @@ app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use('/api', routes);
 
+app.use('/', express.static(`${__dirname}/../../../../client`));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(`${__dirname}/../../../../client/index.html`));
+});
+
 app.use(errors());
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
@@ -36,6 +43,8 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
       .json({ status: 'error', message: err.message });
   }
 
+  console.error(err);
+
   if (err instanceof QueryFailedError) {
     switch ((<any>err).code) {
       case '22P02':
@@ -44,8 +53,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
           .json({ status: 'error', message: locale.validation.invalidUUID });
     }
   }
-
-  console.error(err);
 
   return response.status(500).json({
     status: 'error',

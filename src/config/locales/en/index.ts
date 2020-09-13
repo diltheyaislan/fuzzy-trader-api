@@ -45,8 +45,22 @@ export default {
     },
     role: 'Role',
     roles: {
-      alreadyActivated: 'Role already exists',
+      alreadyExists: 'Role already exists',
       notFound: 'Role not found',
+    },
+    company: 'Company',
+    companies: {
+      alreadyExists: 'Company already exists',
+      notFound: 'Company not found',
+    },
+    cryptocurrency: 'Criptomoeda',
+    cryptocurrencies: {
+      alreadyExists: 'Cryptocurrency already exists',
+      notFound: 'Cryptocurrency not found',
+    },
+    transaction: 'Transaction',
+    transactions: {
+      notFound: 'Transaction not found',
     },
   },
 

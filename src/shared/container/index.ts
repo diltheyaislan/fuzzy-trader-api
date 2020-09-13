@@ -1,6 +1,8 @@
 import { container } from 'tsyringe';
 
 import '@modules/users/providers';
+import '@modules/companies/providers';
+import '@modules/cryptocurrencies/providers';
 import '@shared/container/providers';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
@@ -20,6 +22,21 @@ import UserPermissionsRepository from '@modules/users/infra/typeorm/repositories
 
 import IUserPermissionRepository from '@modules/permissions/repositories/IUserPermissionRepository';
 import UserPermissionRepository from '@modules/permissions/infra/typeorm/repositories/UserPermissionRepository';
+
+import ICompaniesRepository from '@modules/companies/repositories/ICompaniesRepository';
+import CompaniesRepository from '@modules/companies/infra/typeorm/repositories/CompaniesRepository';
+
+import ICryptocurrenciesRepository from '@modules/cryptocurrencies/repositories/ICryptocurrenciesRepository';
+import CryptocurrenciesRepository from '@modules/cryptocurrencies/infra/typeorm/repositories/CryptocurrenciesRepository';
+
+import ITransactionsRepository from '@modules/transactions/repositories/ITransactionsRepository';
+import TransactionsRepository from '@modules/transactions/infra/typeorm/repositories/TransactionsRepository';
+
+import IUserHasCompaniesRepository from '@modules/transactions/repositories/IUserHasCompaniesRepository';
+import UserHasCompaniesRepository from '@modules/transactions/infra/typeorm/repositories/UserHasCompaniesRepository';
+
+import IUserHasCryptocurrenciesRepository from '@modules/transactions/repositories/IUserHasCryptocurrenciesRepository';
+import UserHasCryptocurrenciesRepository from '@modules/transactions/infra/typeorm/repositories/UserHasCryptocurrenciesRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -49,4 +66,29 @@ container.registerSingleton<IUserPermissionsRepository>(
 container.registerSingleton<IUserPermissionRepository>(
   'UserPermissionRepository',
   UserPermissionRepository,
+);
+
+container.registerSingleton<ICompaniesRepository>(
+  'CompaniesRepository',
+  CompaniesRepository,
+);
+
+container.registerSingleton<ICryptocurrenciesRepository>(
+  'CryptocurrenciesRepository',
+  CryptocurrenciesRepository,
+);
+
+container.registerSingleton<ITransactionsRepository>(
+  'TransactionsRepository',
+  TransactionsRepository,
+);
+
+container.registerSingleton<IUserHasCompaniesRepository>(
+  'UserHasCompaniesRepository',
+  UserHasCompaniesRepository,
+);
+
+container.registerSingleton<IUserHasCryptocurrenciesRepository>(
+  'UserHasCryptocurrenciesRepository',
+  UserHasCryptocurrenciesRepository,
 );
