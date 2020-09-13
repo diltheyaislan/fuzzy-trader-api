@@ -19,12 +19,14 @@ class ListUserSharesService {
 
     const symbols = companies.map(company => company.company.symbol);
 
-    const prices = await this.stockMarketProvider.getPrices(...symbols);
+    if (symbols.length > 0) {
+      const prices = await this.stockMarketProvider.getPrices(...symbols);
 
-    companies.forEach(company => {
-      const price = prices.find(p => p.symbol === company.company.symbol);
-      company.company.price = price?.price || 0;
-    });
+      companies.forEach(company => {
+        const price = prices.find(p => p.symbol === company.company.symbol);
+        company.company.price = price?.price || 0;
+      });
+    }
 
     return companies;
   }

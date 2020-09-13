@@ -21,16 +21,18 @@ class ListUserCryptocurrenciesService {
 
     const symbols = currencies.map(currency => currency.cryptocurrency.symbol);
 
-    const prices = await this.cryptocurrencyMarketProvider.getPrices(
-      ...symbols,
-    );
-
-    currencies.forEach(currency => {
-      const price = prices.find(
-        p => p.symbol === currency.cryptocurrency.symbol,
+    if (symbols.length > 0) {
+      const prices = await this.cryptocurrencyMarketProvider.getPrices(
+        ...symbols,
       );
-      currency.cryptocurrency.price = price?.price || 0;
-    });
+
+      currencies.forEach(currency => {
+        const price = prices.find(
+          p => p.symbol === currency.cryptocurrency.symbol,
+        );
+        currency.cryptocurrency.price = price?.price || 0;
+      });
+    }
 
     return currencies;
   }
